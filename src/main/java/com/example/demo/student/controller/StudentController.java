@@ -2,7 +2,7 @@ package com.example.demo.student.controller;
 import java.util.List;
 
 import com.example.demo.student.data.model.Student;
-import com.example.demo.student.service.StudentService;
+import com.example.demo.student.service.impl.StudentServiceImpl;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 public class StudentController {
 
-    private final StudentService studentService;
+    private final StudentServiceImpl studentService;
 
     @Autowired
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentServiceImpl studentService) {
         this.studentService = studentService;
     }
 
@@ -27,7 +27,7 @@ public class StudentController {
 
     @GetMapping
 	public List<Student> getStudents() {
-		return studentService.getStudents(); 
+		return studentService.getStudentsLastNameDesc(); 
 	}
     
 }
