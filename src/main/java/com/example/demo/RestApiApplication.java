@@ -17,15 +17,15 @@ public class RestApiApplication {
 		SpringApplication.run(RestApiApplication.class, args);
 	}
 	
-	@GetMapping
-	public List<Student> hello() {
-		return List.of(
-			new Student(
-				1L,
-				"John",
-				10
-			)
-		);
-	}
+	// @GetMapping
+	// public List<Student> getStudent() {
+	// 	return List.of(
+	// 		new Student(
+	// 			1L,
+	// 			"John",
+	// 			10
+	// 		)
+	// 	);
+	// }
 
 }
