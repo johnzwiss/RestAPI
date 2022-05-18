@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StudentRepository extends CrudRepository<Student, Long> {
-    List<Student> findAllOrderByLastNameDesc();   
-    Optional<Student> findByFirstNameAndByLastName();
+    List<Student> findAllByOrderByLastName();   
+    Optional<Student> findByFirstNameAndLastName(String firstName, String lastName);
 }

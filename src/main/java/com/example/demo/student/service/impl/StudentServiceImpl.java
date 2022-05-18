@@ -11,7 +11,7 @@ import com.example.demo.student.service.StudentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
 
 @Component
 public class StudentServiceImpl implements StudentService {
@@ -28,30 +28,30 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	public List<Student> getStudentsLastNameDesc() {
-		return studentRepository.findAllOrderByLastNameDesc();
+		return studentRepository.findAllByOrderByLastName();
 	}
 
 	public Boolean createStudent(StudentDto requestedStudent) {
 		Optional<Student> existingStudent = studentRepository
-				.findByFirstNameAndByLastName(requestedStudent.getFirstName(), requestedStudent.getLastName());
+				.findByFirstNameAndLastName(requestedStudent.getFirstName(), requestedStudent.getLastName());
 		if (existingStudent.isPresent()) {
 			return false;
 		}
 
 		Student newStudent = StudentMapper.studentDtoToStudent(requestedStudent);
 		studentRepository.save(newStudent);
-		
+
 		return true;
 	}
 
 	public Boolean deleteStudent(Long id) {
 		Optional<Student> deletedStudent = studentRepository.findById(id);
-		if (deletedStudent.isPresent()){
+		if (deletedStudent.isPresent()) {
 			studentRepository.deleteById(id);
 			return true;
 		}
 		return false;
-		
-		}
-	
+
+	}
+
 }
