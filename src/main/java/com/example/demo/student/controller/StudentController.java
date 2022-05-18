@@ -2,6 +2,7 @@ package com.example.demo.student.controller;
 import java.util.List;
 
 import com.example.demo.student.data.model.Student;
+import com.example.demo.student.service.StudentService;
 import com.example.demo.student.service.impl.StudentServiceImpl;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,15 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
-@RequestMapping(path = "api/v1/student")
+@RequestMapping(path = "api/v1/students")
 
 
 public class StudentController {
 
-    private final StudentServiceImpl studentService;
+    private final StudentService studentService;
 
     @Autowired
-    public StudentController(StudentServiceImpl studentService) {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 

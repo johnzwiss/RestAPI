@@ -15,13 +15,11 @@ public class StudentMapper {
     }
 
     public static Student studentDtoToStudent(StudentDto studentDto) {
-        return Student
-                .builder()
-                .firstName(studentDto.getFirstName())
-                .lastName(studentDto.getLastName())
-                .age(studentDto.getAge())
-                .build();
-
+        Student newStudent = new Student();
+        newStudent.setFirstName(studentDto.getFirstName());
+        newStudent.setLastName(studentDto.getLastName());
+        newStudent.setAge(studentDto.getAge());
+        return newStudent;
     }
 
 }
