@@ -7,13 +7,14 @@ import com.example.demo.student.data.model.Student;
 import com.example.demo.student.data.repository.StudentRepository;
 import com.example.demo.student.dto.StudentDto;
 import com.example.demo.student.dto.mapper.StudentMapper;
+import com.example.demo.student.service.StudentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Component
-public class StudentServiceImpl {
+public class StudentServiceImpl implements StudentService {
 
 	private final StudentRepository studentRepository;
 
@@ -42,4 +43,15 @@ public class StudentServiceImpl {
 		
 		return true;
 	}
+
+	public Boolean deleteStudent(Long id) {
+		Optional<Student> deletedStudent = studentRepository.findById(id);
+		if (deletedStudent.isPresent()){
+			studentRepository.deleteById(id);
+			return true;
+		}
+		return false;
+		
+		}
+	
 }
