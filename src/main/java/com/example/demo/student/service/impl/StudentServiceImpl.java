@@ -2,6 +2,9 @@ package com.example.demo.student.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.print.attribute.standard.MediaSize.Other;
 
 import com.example.demo.student.data.model.Student;
 import com.example.demo.student.data.repository.StudentRepository;
@@ -11,24 +14,27 @@ import com.example.demo.student.service.StudentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import lombok.RequiredArgsConstructor;
 
 
 @Component
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
 	private final StudentRepository studentRepository;
 
-	@Autowired
-	public StudentServiceImpl(StudentRepository studentRepository) {
-		this.studentRepository = studentRepository;
+	public StudentDto getStudent(Long id) {
+		return studentRepository.findById((id)).map(StudentMapper::studentToStudentDto).orElse(null);
 	}
 
-	public Optional<Student> getStudent(Long id) {
-		return studentRepository.findById(id);
-	}
-
-	public List<Student> getStudentsLastNameDesc() {
-		return studentRepository.findAllByOrderByLastName();
+	public List<StudentDto> getStudentsLastNameDesc() {
+		return studentRepository
+		.findAllByOrderByLastName()
+		.stream()
+		.map(StudentMapper::studentToStudentDto)
+		.collect(Collectors.toList());
 	}
 
 	public Boolean createStudent(StudentDto requestedStudent) {
@@ -45,8 +51,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	public Boolean deleteStudent(Long id) {
-		Optional<Student> deletedStudent = studentRepository.findById(id);
-		if (deletedStudent.isPresent()) {
+		if (studentRepository.existsById(id)) {
 			studentRepository.deleteById(id);
 			return true;
 		}

@@ -8,7 +8,8 @@ import com.example.demo.student.dto.StudentDto;
 
 
 public interface StudentService {
-    Optional<Student> getStudent(Long id);
-    List<Student> getStudentsLastNameDesc();
+    StudentDto getStudent(Long id);
+    List<StudentDto> getStudentsLastNameDesc();
     Boolean createStudent(StudentDto requestedStudent);
+    Boolean deleteStudent(Long id);
 }
